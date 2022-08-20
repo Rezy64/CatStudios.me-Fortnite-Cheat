@@ -6,6 +6,7 @@ Im deciding to take a break and quit for a while.
 Menu Was Made by Havoc, Cheat By Me, and damage helped update.
 
 i changed the driver to a shittier driver for release.
+Also this is updated for latest update.
 Cheat Features
 Aimbot
 Controller Mode
