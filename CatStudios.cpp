@@ -651,140 +651,6 @@ void world3() {
 
 
 				}
-
-				if (spinbot)
-				{
-					auto Mesh = read<uint64_t>(LocalPawn + 0x2f0);
-					static auto Cached = read<Vector3>(Mesh + 0x140);
-
-					if (GetAsyncKeyState(VK_LBUTTON)) {
-						write<Vector3>(Mesh + 0x140, Vector3(1, rand() % 361, 1));
-					}
-					else write<Vector3>(Mesh + 0x140, Cached);
-				}
-
-				if (aimair)
-				{
-					write<bool>(LocalPawn + 0x4915, true);
-				}
-
-
-				if (niggerfovchanger) {
-					uint64_t CamManager = read<uint64_t>(PlayerController + 0x328);
-					write<float>(CamManager + 0x284 + 0x4, FOVChangerValue);
-				}
-
-				if (rapidaug)
-				{
-					if (GetAsyncKeyState(VK_LBUTTON))
-					{
-						write<float>(CurrentWeapon + 0x64, 0.00001);
-					}
-					else
-					{
-						write<float>(CurrentWeapon + 0x64, 1);
-
-					}
-					if (SuperSpeed)
-					{
-						write<float>(WorldSettings + 0x398, 30);
-
-					}
-					else
-					{
-						write<float>(WorldSettings + 0x398, 1);
-					}
-					if (instantreload)
-					{
-						uint64_t Catman = read<uint64_t>(WorldSettings + 0x398);
-						write<float>(CurrentWeapon + Catman, 30);
-					}
-					else
-					{
-						uint64_t Catwomen = read<uint64_t>(WorldSettings + 0x398);
-						write<float>(CurrentWeapon + Catwomen, 1);
-					}
-
-					if (speedvehicle)
-					{
-						if (CurrentVehicle)
-						{
-							write<float>(WorldSettings + 0x398, 30);
-						}
-						else
-						{
-							write<float>(WorldSettings + 0x398, 1);
-						}
-					}
-					
-					if (boatspeed)
-					{
-						if (GetAsyncKeyState(VK_SHIFT))
-						{
-
-							uint64_t Vehicle = read<uint64_t>(LocalPawn + 0x21b8); //FortPlayerPawn::CurrentVehicle
-							write<float>(Vehicle + 0xc6c, speed);//multiplier run     AFortAthenaVehicle::CachedSpeed
-							write<float>(Vehicle + 0x8e0, speed);//multiplier run     AFortAthenaVehicle::TopSpeedCurrentMultiplier
-							write<float>(Vehicle + 0x8e4, speed);//multiplier run     AFortAthenaVehicle::PushForceCurrentMultiplier
-							write<float>(Vehicle + 0x774, speed);//just speed         AFortAthenaVehicle::WaterEffectsVehicleMaxSpeedKmh
-						}
-					}
-
-					if (gravity)
-					{
-						float gravitynerds = 50.f;
-						if (CurrentVehicle)
-						{
-							if (GetAsyncKeyState(VK_SHIFT))
-							{
-								write<float>(CurrentVehicle + 0x1030 + 0x18, gravitynerds * -1); //VehicleGravityScale 
-							}
-							else if (GetAsyncKeyState(VK_F3))
-							{
-								write<float>(CurrentVehicle + 0x1030 + 0x18, gravitynerds); //VehicleGravityScale 
-							}
-							else
-							{
-								write<float>(CurrentVehicle + 0x1030 + 0x18, 1); //VehicleGravityScale 
-							}
-						}
-					}
-
-					if (boatfly)
-					{
-						if (GetAsyncKeyState(VK_SHIFT))
-						{
-							if (CurrentVehicle)
-							{
-								uint64_t CurrentVehicle1 = read<uint64_t>(LocalPawn + 0x21b8);
-								write<float>(CurrentVehicle1 + 0xc6c, 3);
-								write<float>(CurrentVehicle1 + 0x8e0, 5);
-								write<float>(CurrentVehicle1 + 0x8e4, 3);
-								write<float>(CurrentVehicle1 + 0x774, 3);
-							}
-						}
-					}
-
-
-					if (VehicleBhop)
-					{
-						//AFortAthenaVehicle    FrontMassRatio    0x958    float
-						//AFortAthenaVehicle    RearMassRatio    0x95c    float
-
-						uintptr_t LocalVehicle = read<uintptr_t>(LocalPawn + 0x21b8);
-						if (GetAsyncKeyState(VK_SHIFT))
-						{
-							if (LocalVehicle)
-							{
-								write<float>(LocalVehicle + 0x958, -0.318581);
-								write<float>(LocalVehicle + 0x95c, -0.481419);
-							}
-
-						}
-					}
-
-				}
-			}
 	
 
 
@@ -2146,6 +2012,7 @@ void render()
 				ImGui::SetCursorPos(ImVec2(65, 44));
 				ImGui::BeginChild("Misc/Exploits", ImVec2(219, 342));
 				{
+					// i just removed em lol
 					ImGui::Checkbox("Super Speed / Unsafe", &SuperSpeed);
 					ImGui::Checkbox("Speed Vehicle/ Unsafe", &speedvehicle);
 					ImGui::Checkbox("Boat Fly/ Unsafe", &boatfly);
